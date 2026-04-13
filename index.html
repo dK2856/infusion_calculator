@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infusion Rate Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      padding: 15px;
+    }
+
+    .card {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .calculate {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .clear {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .result {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <h2>Infusion Rate Calculator</h2>
+
+    <div class="input-group">
+      <label>Dose (mcg/kg/min)</label>
+      <input type="number" id="dose" placeholder="Enter dose">
+    </div>
+
+    <div class="input-group">
+      <label>Weight (kg)</label>
+      <input type="number" id="weight" placeholder="Enter weight">
+    </div>
+
+    <div class="input-group">
+      <label>Drug Concentration (mcg/mL)</label>
+      <input type="number" id="concentration" placeholder="Enter concentration">
+    </div>
+
+    <button class="calculate" onclick="calculate()">Calculate</button>
+    <button class="clear" onclick="clearFields()">Clear</button>
+
+    <div class="result" id="result"></div>
+  </div>
+</div>
+
+<script>
+  function calculate() {
+    const dose = parseFloat(document.getElementById("dose").value);
+    const weight = parseFloat(document.getElementById("weight").value);
+    const concentration = parseFloat(document.getElementById("concentration").value);
+
+    if (!dose || !weight || !concentration) {
+      alert("Please fill all fields correctly");
+      return;
+    }
+
+    const infusionRate = (dose * weight * 60) / concentration;
+
+    document.getElementById("result").innerHTML =
+      "Infusion Rate: <strong>" + infusionRate.toFixed(2) + " mL/hr</strong>";
+  }
+
+  function clearFields() {
+    document.getElementById("dose").value = "";
+    document.getElementById("weight").value = "";
+    document.getElementById("concentration").value = "";
+    document.getElementById("result").innerHTML = "";
+  }
+</script>
+
+</body>
+</html>
